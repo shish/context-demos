@@ -4,7 +4,7 @@ from threading import Thread
 from time import sleep
 import sys
 
-sys.path.append("../../context-apis/python/")
+sys.path.append("../context-apis/python/")
 
 import context.api as c
 
@@ -124,7 +124,7 @@ def thread_4():
     c.log_endok("Read article")
 
 if __name__ == "__main__":
-    c.set_log("file://%s" % sys.argv[0].replace(".py", ".ctxt"))
+    c.set_log("file://%s" % sys.argv[0].replace(".py", ".ctxt"), append=False)
 
     Thread(target=thread_1, name="Server-1").start()
     sleep(0.05)

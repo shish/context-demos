@@ -7,12 +7,12 @@ import sys
 import time
 import threading
 
-sys.path.append("../../context-apis/python/")
+sys.path.append("../context-apis/python/")
 
 import context.api as c
 
 if __name__ == "__main__":
-    c.set_log("file://%s" % sys.argv[0].replace(".py", ".ctxt"))
+    c.set_log("file://%s" % sys.argv[0].replace(".py", ".ctxt"), append=False)
 
     c.log_start("Rendering Repeat", bookmark=True)
     for n in range(0, 1000):

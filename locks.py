@@ -7,7 +7,7 @@ import sys
 import time
 import threading
 
-sys.path.append("../../context-apis/python/")
+sys.path.append("../context-apis/python/")
 
 import context.api as c
 
@@ -25,19 +25,15 @@ def thread():
         time.sleep(1 + random.random() * 2.0)
         c.log_endok("")
 
-        c.log_start("Waiting for lock")
-        lock.acquire()
-        c.log_endok("")
-
-        c.log_start("Adding to archive")
-        time.sleep(1 + random.random() * 2.0)
-        lock.release()
-        c.log_endok("")
+        with lock:
+            c.log_start("Adding to archive")
+            time.sleep(1 + random.random() * 2.0)
+            c.log_endok("")
 
         c.log_endok("")
 
 if __name__ == "__main__":
-    c.set_log("file://%s" % sys.argv[0].replace(".py", ".ctxt"))
+    c.set_log("file://%s" % sys.argv[0].replace(".py", ".ctxt"), append=False)
 
     Thread(target=thread, name="Server-1").start()
     sleep(0.05)
